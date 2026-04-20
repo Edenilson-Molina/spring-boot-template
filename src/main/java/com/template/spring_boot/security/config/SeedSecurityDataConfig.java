@@ -19,11 +19,11 @@ public class SeedSecurityDataConfig {
 
     @Bean
     public CommandLineRunner seedSecurityData(
-            PermissionRepository permissionRepository,
-            RoleRepository roleRepository,
-            UserRepository userRepository,
-            PasswordEncoder passwordEncoder,
-            @Value("${app.security.seed.enabled:true}") boolean seedEnabled
+        PermissionRepository permissionRepository,
+        RoleRepository roleRepository,
+        UserRepository userRepository,
+        PasswordEncoder passwordEncoder,
+        @Value("${app.security.seed.enabled:true}") boolean seedEnabled
     ) {
         return args -> {
             if (!seedEnabled) {

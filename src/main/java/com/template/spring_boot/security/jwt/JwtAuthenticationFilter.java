@@ -21,9 +21,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final JwtTokenBlacklistService tokenBlacklistService;
 
     public JwtAuthenticationFilter(
-            JwtService jwtService,
-            UserDetailsService userDetailsService,
-            JwtTokenBlacklistService tokenBlacklistService
+        JwtService jwtService,
+        UserDetailsService userDetailsService,
+        JwtTokenBlacklistService tokenBlacklistService
     ) {
         this.jwtService = jwtService;
         this.userDetailsService = userDetailsService;
@@ -32,9 +32,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(
-            HttpServletRequest request,
-            HttpServletResponse response,
-            FilterChain filterChain
+        HttpServletRequest request,
+        HttpServletResponse response,
+        FilterChain filterChain
     ) throws ServletException, IOException {
         String authHeader = request.getHeader("Authorization");
 
