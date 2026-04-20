@@ -1,0 +1,55 @@
+package com.template.spring_boot.security.auth.controller;
+
+import com.template.spring_boot.security.auth.dto.AuthResponse;
+import com.template.spring_boot.security.auth.dto.LoginRequest;
+import com.template.spring_boot.security.auth.dto.MessageResponse;
+import com.template.spring_boot.security.auth.service.AuthService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/api/auth")
+public class AuthController {
+
+    private final AuthService authService;
+
+    public AuthController(AuthService authService) {
+        this.authService = authService;
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request) {
+        AuthResponse response = authService.login(request);
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<MessageResponse> logout(
+            @RequestHeader(value = "Authorization", required = false) String authorization
+    ) {
+        if (authorization == null || !authorization.startsWith("Bearer ")) {
+            return ResponseEntity.badRequest().body(new MessageResponse("Header Authorization invalido"));
+        }
+
+        String token = authorization.substring(7);
+        String message = authService.logout(token);
+        return ResponseEntity.ok(new MessageResponse(message));
+    }
+
+    @org.springframework.web.bind.annotation.ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity<MessageResponse> badCredentials(BadCredentialsException ex) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                .body(new MessageResponse("Credenciales invalidas"));
+    }
+
+    @org.springframework.web.bind.annotation.ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<MessageResponse> illegalArgument(IllegalArgumentException ex) {
+        return ResponseEntity.badRequest().body(new MessageResponse(ex.getMessage()));
+    }
+}
