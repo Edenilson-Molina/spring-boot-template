@@ -4,6 +4,7 @@ import com.template.spring_boot.security.auth.dto.AuthResponse;
 import com.template.spring_boot.security.auth.dto.LoginRequest;
 import com.template.spring_boot.security.auth.dto.MessageResponse;
 import com.template.spring_boot.security.auth.service.AuthService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,7 +23,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request) {
+    public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest request) {
         AuthResponse response = authService.login(request);
         return ResponseEntity.ok(response);
     }
