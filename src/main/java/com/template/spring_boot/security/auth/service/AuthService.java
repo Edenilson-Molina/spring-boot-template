@@ -8,6 +8,7 @@ import com.template.spring_boot.security.model.User;
 import com.template.spring_boot.security.repository.UserRepository;
 import java.time.Instant;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 
@@ -37,7 +38,7 @@ public class AuthService {
         );
 
         User user = userRepository.findByUsername(request.username())
-            .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado"));
+            .orElseThrow(() -> new BadCredentialsException("Credenciales invalidas"));
 
         String token = jwtService.generateToken(user);
         Instant expiresAt = jwtService.extractExpiration(token).toInstant();
