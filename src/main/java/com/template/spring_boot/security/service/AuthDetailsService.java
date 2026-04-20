@@ -38,8 +38,9 @@ public class AuthDetailsService implements UserDetailsService {
 
         user.getRoles().forEach(role -> {
             authorities.add(new SimpleGrantedAuthority(role.getName()));
-            role.getPermissions().forEach(permission ->
-                    authorities.add(new SimpleGrantedAuthority(permission.getName())));
+            role.getPermissions().forEach(
+                permission -> authorities.add(new SimpleGrantedAuthority(permission.getName()))
+            );
         });
 
         return authorities;
