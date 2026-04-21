@@ -1,20 +1,40 @@
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot-6DB33F?style=flat-square&logo=spring&logoColor=white) 
-![Oracle](https://img.shields.io/badge/Oracle-F80000?style=flat-square&logo=oracle&logoColor=white) 
+[![Java 21](https://img.shields.io/badge/Java-21-007396?style=for-the-badge&logo=openjdk&logoColor=white)](#)
+[![Spring Boot 4](https://img.shields.io/badge/Spring%20Boot-4-6DB33F?style=for-the-badge&logo=spring&logoColor=white)](#)
+[![Spring Security](https://img.shields.io/badge/Spring%20Security-JWT-2E7D32?style=for-the-badge&logo=springsecurity&logoColor=white)](#)
+[![Oracle XE](https://img.shields.io/badge/Oracle-XE-F80000?style=for-the-badge&logo=oracle&logoColor=white)](#)
+[![Maven](https://img.shields.io/badge/Maven-Build-C71A36?style=for-the-badge&logo=apachemaven&logoColor=white)](#)
 
 # Plantilla Spring Boot
-Proyecto base para aplicaciones Spring Boot con Oracle, siguiendo buenas prácticas de arquitectura y desarrollo.
+Plantilla base para APIs REST con Spring Boot y Oracle lista para iniciar proyectos reales con seguridad JWT, seed inicial y arquitectura por capas.
 
-## Características principales:
+## Lo que incluye
 - Java 21
-- Spring Boot
-- Spring Data JPA
-- Spring Security
-- API REST (JSON)
+- Spring Boot 4
+- Spring Data JPA + Hibernate
+- Spring Security + JWT (login/logout)
+- Manejo global de errores (formato `code`, `message`)
+- Validación de entrada en requests
+- Seed de seguridad configurable (permisos, roles, usuarios)
 - Base de datos Oracle (XE / XEPDB1)
 
-## Ejecutar proyecto
-```powershell
-npm run build
-mvn clean install
-mvn spring-boot:run
-```
+## Inicio rapido
+1. Configura tu conexion en `src/main/resources/application.properties`.
+2. Ejecuta:
+    ```powershell
+    ./mvnw clean install
+    ./mvnw spring-boot:run
+    ```
+
+3. Login de prueba:
+    ```http
+    POST /api/auth/login
+    Content-Type: application/json
+
+    {
+        "username": "admin",
+        "password": "Admin123*"
+    }
+    ```
+
+## Enfoque
+Codigo simple, estructura mantenible y arranque rapido para reutilizar la plantilla en nuevos proyectos.

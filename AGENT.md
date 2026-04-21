@@ -74,6 +74,7 @@ Reglas:
 -   `dto`
 -   `exception`
 -   `config`
+-   `seeder`
 
 Naming:
 
@@ -102,7 +103,18 @@ Naming:
 -   Evitar queries ineficientes
 ------------------------------------------------------------------------
 
-## 9. Seguridad y Validación
+## 9. Migraciones (Flyway)
+
+- Usar formato: V<major>_<minor>_<patch>__<acción>_<entidad>.sql
+- Ejemplo: V1_0_1__create_users_table.sql
+
+Reglas:
+- No modificar migraciones existentes
+- Crear una nueva migración por cambio
+- Mantener orden incremental
+- Usar nombres descriptivos
+
+## 10. Seguridad y Validación
 
 -   Definir endpoints públicos vs protegidos
 -   Proteger operaciones de escritura
@@ -110,7 +122,20 @@ Naming:
 -   Manejo centralizado de errores (`@ControllerAdvice`)
 ------------------------------------------------------------------------
 
-## 10. Formato de Datos
+## 10.1 Seeders (Infraestructura)
+
+La carga de datos semilla se maneja en infraestructura.
+
+Reglas mínimas:
+- Ubicación: `infrastructure/seed/**`.
+- Orquestación: `SeedRunner` + `DataSeeder`.
+- Catálogo único por dominio (ej. `SecuritySeedCatalog`) para listas de seed.
+- Seeders idempotentes con `findByX(...).orElseGet(() -> save(...))`.
+- Orden por dependencia con `getOrder()` (permisos -> roles -> usuarios).
+- Seed activable/desactivable por propiedad: `app.security.seed.enabled`.
+------------------------------------------------------------------------
+
+## 11. Formato de Datos
 
 ### Fechas
 
@@ -131,7 +156,7 @@ Naming:
 -   Usar `RoundingMode.HALF_UP`
 ------------------------------------------------------------------------
 
-## 11. Nomenclatura
+## 12. Nomenclatura
 
 ### Java
 
@@ -169,7 +194,7 @@ Reglas:
 - No usar abreviaciones ambiguas
 ------------------------------------------------------------------------
 
-## 12. Flujo del Agente
+## 13. Flujo del Agente
 
 1.  Confirmar alcance brevemente
 2.  Leer contexto mínimo necesario
@@ -184,7 +209,7 @@ Reglas:
     -   Resultado de validación
 ------------------------------------------------------------------------
 
-## 13. Criterio de Finalización
+## 14. Criterio de Finalización
 
 Una tarea está completa si:
 -   El proyecto compila
@@ -194,7 +219,7 @@ Una tarea está completa si:
 -   Seguridad y validación se mantienen o mejoran
 ------------------------------------------------------------------------
 
-## 14. Inputs Requeridos
+## 15. Inputs Requeridos
 
 Antes de implementar:
 -   Endpoint (ruta + método HTTP)
@@ -206,7 +231,7 @@ Antes de implementar:
 Si falta algo crítico, hacer una sola pregunta clara.
 ------------------------------------------------------------------------
 
-## 15. Restricciones
+## 16. Restricciones
 
 -   No inventar lógica de negocio
 -   No refactorizar código no relacionado
