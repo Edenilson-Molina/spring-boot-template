@@ -34,7 +34,7 @@ public class UserSeeder implements DataSeeder {
 
     @Override
     public void seed() {
-        SecuritySeedCatalog.USERS.forEach(seed -> userRepository.findByUsername(seed.username())
+        SecuritySeedCatalog.USERS.forEach(seed -> userRepository.findByEmail(seed.email())
             .orElseGet(() -> userRepository.save(
                 User.builder()
                     .username(seed.username())

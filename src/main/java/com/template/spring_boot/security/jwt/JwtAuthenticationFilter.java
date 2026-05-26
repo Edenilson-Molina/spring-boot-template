@@ -52,18 +52,18 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             return;
         }
 
-        String username;
+        String email;
         try {
-            username = jwtService.extractUsername(jwtToken);
+            email = jwtService.extractEmail(jwtToken);
         } catch (Exception ex) {
             writeErrorResponse(response, HttpStatus.UNAUTHORIZED, "Token invalido");
             return;
         }
 
-        if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+        if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails;
             try {
-                userDetails = userDetailsService.loadUserByUsername(username);
+                userDetails = userDetailsService.loadUserByUsername(email);
             } catch (Exception ex) {
                 writeErrorResponse(response, HttpStatus.UNAUTHORIZED, "Token invalido");
                 return;

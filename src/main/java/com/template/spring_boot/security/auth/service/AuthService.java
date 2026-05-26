@@ -34,10 +34,10 @@ public class AuthService {
 
     public AuthResponse login(LoginRequest request) {
         authenticationManager.authenticate(
-            new UsernamePasswordAuthenticationToken(request.username(), request.password())
+            new UsernamePasswordAuthenticationToken(request.email(), request.password())
         );
 
-        User user = userRepository.findByUsername(request.username())
+        User user = userRepository.findByEmail(request.email())
             .orElseThrow(() -> new BadCredentialsException("Credenciales invalidas"));
 
         String token = jwtService.generateToken(user);

@@ -3,7 +3,7 @@ package com.template.spring_boot.security.auth.dto;
 import java.time.Instant;
 
 public record AuthResponse(
-    String token,
+    String accessToken,
     String tokenType,
     Instant expiresAt
 ) {

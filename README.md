@@ -20,21 +20,21 @@ Plantilla base para APIs REST con Spring Boot y Oracle lista para iniciar proyec
 ## Inicio rapido
 1. Configura tu conexion en `src/main/resources/application.properties`.
 2. Ejecuta:
-    ```powershell
+```powershell
     ./mvnw clean install
     ./mvnw spring-boot:run
-    ```
+```
 
 3. Login de prueba:
-    ```http
+```http
     POST /api/auth/login
     Content-Type: application/json
 
     {
-        "username": "admin",
-        "password": "Admin123*"
+        "email": "admin@example.com",
+        "password": "pass123"
     }
-    ```
+```
 
 ## Enfoque
 Codigo simple, estructura mantenible y arranque rapido para reutilizar la plantilla en nuevos proyectos.

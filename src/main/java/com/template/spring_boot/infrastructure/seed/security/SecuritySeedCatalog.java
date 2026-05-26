@@ -11,18 +11,18 @@ public final class SecuritySeedCatalog {
     }
 
     public static final List<PermissionSeed> PERMISSIONS = List.of(
-        new PermissionSeed("READ_PUBLIC", "Permite lectura de recursos publicos"),
-        new PermissionSeed("MANAGE_USERS", "Permite administrar usuarios")
+        new PermissionSeed("VER_USUARIOS", "Permite lectura de recursos publicos"),
+        new PermissionSeed("ACTUALIZAR_USUARIOS", "Permite administrar usuarios")
     );
 
     public static final List<RoleSeed> ROLES = List.of(
-        new RoleSeed("ROLE_ADMIN", Set.of("READ_PUBLIC", "MANAGE_USERS")),
-        new RoleSeed("ROLE_GUEST", Set.of("READ_PUBLIC"))
+        new RoleSeed("ROLE_ADMIN", Set.of("VER_USUARIOS", "ACTUALIZAR_USUARIOS")),
+        new RoleSeed("ROLE_GUEST", Set.of("VER_USUARIOS"))
     );
 
     public static final List<UserSeed> USERS = List.of(
-        new UserSeed("admin", "admin@local.dev", "Admin", "Principal", "Admin123*", Set.of("ROLE_ADMIN")),
-        new UserSeed("guest", "guest@local.dev", "Usuario", "Invitado", "Guest123*", Set.of("ROLE_GUEST"))
+        new UserSeed("admin", "admin@example.com", "Admin", "Principal", "pass123", Set.of("ROLE_ADMIN")),
+        new UserSeed("guest", "guest@example.com", "Usuario", "Invitado", "pass123", Set.of("ROLE_GUEST"))
     );
 
     static {
